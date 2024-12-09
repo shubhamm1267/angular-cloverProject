@@ -1,0 +1,52 @@
+<div class="item" *ngIf="loding">
+  <ngx-skeleton-loader count="8"> </ngx-skeleton-loader>
+</div>
+<div *ngIf="!loding">
+  <input
+    type="text"
+    placeholder="Search city"
+    (input)="onSearch($event.target.value)"
+  />
+
+  <div
+    *ngIf="weatherData; else errorTemplate"
+    style="display:flex;justify-content: space-between"
+  >
+    <mat-card>
+      <h3>{{ weatherData.name }} - {{ weatherData.sys.country }}</h3>
+
+      <p>
+        Temperature: {{ weatherData.main.temp - 273.15 | number : '1.0-1' }} °C
+      </p>
+      <p>Weather: {{ weatherData.weather[0].description }}</p>
+      <p>Wind Speed: {{ weatherData.wind.speed }}</p>
+      <p>Humidity: {{ weatherData.main.humidity }}</p>
+      <p>Current Time:{{currentTime}}</p>
+      <p>Status: {{ isDay ? 'Day' : 'Night' }}</p>
+      <!-- <p *ngIf="isDay"></p> -->
+      <img [src]="wheatherIconUrl" alt="" style="float:left" />
+      <button mat-fab color="primary" (click)="addToFavorites()">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+
+  <ng-template #errorTemplate>
+    <p>{{ error }}</p>
+  </ng-template>
+
+  <mat-card>
+    <div style="display:flex; justify-content: space-between">
+      <h4>Favorite Cities</h4>
+      <button mat-fab color="warn" (click)="removeAllFromFav()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <ul>
+      <li *ngFor="let favorite of favorites">
+        {{ favorite.sys.country }} - {{ favorite.name }} -
+        {{ favorite.main.temp - 273.15 | number : '1.0-1' }} °C
+      </li>
+    </ul>
+  </mat-card>
+</div>

@@ -1,0 +1,31 @@
+input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+
+button:hover {
+  background-color: #023e8a;
+}
+
+@media (max-width: 768px) {
+  input {
+    font-size: 0.9rem;
+  }
+
+  
+}
+
+
+.item {
+  width: auto;
+  height: auto;
+  margin: 10px auto;
+  border: 1px solid #eaeaea;
+  padding: 10px;
+}

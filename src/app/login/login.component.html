@@ -1,0 +1,25 @@
+<div class="item" *ngIf="loding">
+  <ngx-skeleton-loader count="8"> </ngx-skeleton-loader>
+</div>
+<mat-card *ngIf="!loding" style="display:flex">
+  <div *ngIf="weatherData; else errorTemplate">
+    <h2>Current Weather</h2>
+    <p>Location: {{ weatherData.name }}</p>
+    <p>Country: {{ weatherData.sys.country }}</p>
+    <p>
+      Temperature: {{ weatherData.main.temp - 273.15 | number : '1.0-1' }} °C
+    </p>
+    <p>Weather: {{ weatherData.weather[0].description }}</p>
+    <p>Wind Speed: {{ weatherData.wind.speed }}</p>
+    <p>Humidity: {{ weatherData.main.humidity }}</p>
+    <p>Current Time:{{ currentTime }}</p>
+    <p>Status: {{ isDay ? 'Day' : 'Night' }}</p>
+  </div>
+  <img [src]="weatherIconUrl" alt="" />
+</mat-card>
+
+<!-- <button (click)="navigate()" style="background-color:lightgreen">Next</button> -->
+
+<ng-template #errorTemplate>
+  <p>{{ error }}</p>
+</ng-template>
